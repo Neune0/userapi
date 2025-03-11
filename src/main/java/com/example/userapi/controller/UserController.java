@@ -3,8 +3,7 @@ package com.example.userapi.controller;
 import com.example.userapi.model.User;
 import com.example.userapi.service.UserService;
 
-
-
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @RestController
@@ -40,4 +42,15 @@ public class UserController{
     public List<User> getUsersByName(@RequestParam String name){
         return userService.getUsersByName(name);
     }
+
+    @PostMapping
+    public ResponseEntity<User> postMethodName(@RequestBody User user) {
+        // add user
+        User userCreated = userService.addUser(user);
+        // redirect to the created user
+        URI location = URI.create(String.format("/api/users/%d", userCreated.getId()));
+        // return the created user in the response body and the location in the header
+        return ResponseEntity.created(location).body(userCreated);
+    }
+    
 }
