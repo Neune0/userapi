@@ -2,11 +2,10 @@ package com.example.userapi.controller;
 
 import com.example.userapi.model.User;
 import com.example.userapi.service.UserService;
-import java.springframework.web.bind.annotation.RestController;
-import java.springframework.web.bind.annotation.RequestMapping;
-import java.springframework.web.bind.annotation.GetMapping;
-import java.springframework.web.bind.annotation.PathVariable;
+import java.springframework.web.bind.annotation.*;
 import java.springframework.http.ResponseEntity;
+
+
 import java.util.List;
 import java.util.Optional;
 
