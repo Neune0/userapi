@@ -34,14 +34,10 @@ public class UserController{
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id){
-        Optional<User> user = userService.getUserById(id);
+        Optional<User> user = Optional.ofNullable(userService.getUserById(id));
         return user.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/search")
-    public List<User> getUsersByName(@RequestParam String name){
-        return userService.getUsersByName(name);
-    }
 
     @PostMapping
     public ResponseEntity<User> postMethodName(@RequestBody User user) {
